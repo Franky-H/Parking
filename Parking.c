@@ -25,12 +25,12 @@ Reserve reserved_cars[30];
 int main_menu() {
 	int menu;
 	
-	puts("1. ÁÖÂ÷");
-	puts("2. ÃâÂ÷");
-	puts("3. ÁöÁ¤Â÷·® µî·Ï");
-	puts("4. ÁÖÂ÷ÇöÈ² Ãâ·Â");
-	puts("0. Á¾·á");
-	printf("> ¹øÈ£ ¼±ÅÃ : ");
+	puts("1. ì£¼ì°¨");
+	puts("2. ì¶œì°¨");
+	puts("3. ì§€ì •ì°¨ëŸ‰ ë“±ë¡");
+	puts("4. ì£¼ì°¨í˜„í™© ì¶œë ¥");
+	puts("0. ì¢…ë£Œ");
+	printf("> ë²ˆí˜¸ ì„ íƒ : ");
 	scanf("%d", &menu);
 
 	return menu;
@@ -50,7 +50,7 @@ void print_parking_lot(int floor) {
 	switch(floor){
 		case 0:
 			for (i = 0; i < 3; i++) {
-				printf("[B%dÃş]========================\n", i + 1);
+				printf("[B%dì¸µ]========================\n", i + 1);
 				for (j = 0; j < 10; j++) {
 					printf("[%s]", parking_lots[i][j]);
 					if (j == 4)
@@ -60,7 +60,7 @@ void print_parking_lot(int floor) {
 			}
 			break;
 		case 1:
-			printf("[B1Ãş]========================\n");
+			printf("[B1ì¸µ]========================\n");
 			for (j = 0; j < 10; j++) {
 				printf("[%s]", parking_lots[0][j]);
 				if (j == 4)
@@ -69,7 +69,7 @@ void print_parking_lot(int floor) {
 			printf("\r\n");
 			break;
 		case 2:
-			printf("[B2Ãş]========================\n");
+			printf("[B2ì¸µ]========================\n");
 			for (j = 0; j < 10; j++) {
 				printf("[%s]", parking_lots[1][j]);
 				if (j == 4)
@@ -78,7 +78,7 @@ void print_parking_lot(int floor) {
 			printf("\r\n");			
 			break;
 		case 3:
-			printf("[B3Ãş]========================\n");
+			printf("[B3ì¸µ]========================\n");
 			for (j = 0; j < 10; j++) {
 				printf("[%s]", parking_lots[2][j]);
 				if (j == 4)
@@ -95,7 +95,7 @@ int available_lots(char floor[10][BUFSIZ]){
 	int i, j, k;
 	for(i = 0; i < 10; i++){
 		if(strchr(floor[i], ' ')){
-//			printf("%d °ø¹é \n", i);
+//			printf("%d ê³µë°± \n", i);
 			cnt++;
 		}
 	}
@@ -103,34 +103,34 @@ int available_lots(char floor[10][BUFSIZ]){
 }
 
 int end_process(int c_cnt, int r_cnt) {
-	// ÆÄÀÏ¿¡ ¾²±â
-	// ÇÁ·Î±×·¥ Á¾·á
+	// íŒŒì¼ì— ì“°ê¸°
+	// í”„ë¡œê·¸ë¨ ì¢…ë£Œ
 	FILE * fp;
 	
 	int i, j;
 	
-	puts("ÇÁ·Î±×·¥À» Á¾·áÇÕ´Ï´Ù.");
+	puts("í”„ë¡œê·¸ë¨ì„ ì¢…ë£Œí•©ë‹ˆë‹¤.");
 	
 	fp = fopen("parking_lot.txt", "w");
 	
 	if(fp == NULL)
 		return -1;
 		
-//	puts("ÁÖÂ÷µÈ Â÷·® ¸ñ·Ï");
-	fprintf(fp, "ÁÖÂ÷µÈ Â÷·® ¸ñ·Ï\n");
+//	puts("ì£¼ì°¨ëœ ì°¨ëŸ‰ ëª©ë¡");
+	fprintf(fp, "ì£¼ì°¨ëœ ì°¨ëŸ‰ ëª©ë¡\n");
 	fprintf(fp, "%d\n", c_cnt);
 	for(i = 0; i < c_cnt; i++){
 //		printf("%s %d %d\n", parked_cars[i].car_num, parked_cars[i].parked_place.floor, parked_cars[i].parked_place.num);
 		fprintf(fp, "%s %d %d\n", parked_cars[i].car_num, parked_cars[i].parked_place.floor, parked_cars[i].parked_place.num);
 	}
 	
-	fprintf(fp, "¿¹¾àµÈ Â÷·® ¸ñ·Ï\n");
+	fprintf(fp, "ì˜ˆì•½ëœ ì°¨ëŸ‰ ëª©ë¡\n");
 	fprintf(fp, "%d\n", r_cnt);
 	for(i = 0; i < r_cnt; i++){
 		fprintf(fp, "%s %d %d\n", reserved_cars[i].car_num, reserved_cars[i].reserved_place.floor, reserved_cars[i].reserved_place.num);
 	}
 	
-	fprintf(fp, "Ãşº° Â÷·® ¸ñ·Ï\n");
+	fprintf(fp, "ì¸µë³„ ì°¨ëŸ‰ ëª©ë¡\n");
 	
 	for (i = 0; i < 3; i++) {
 		for (j = 0; j < 10; j++) {
@@ -170,7 +170,7 @@ int start_process(int c_cnt, int r_cnt){
 	while(!feof(fp)){
 		fgets(buffer, BUFSIZ, fp);
 //		puts(buffer);	
-		if(strcmp(buffer, "ÁÖÂ÷µÈ Â÷·® ¸ñ·Ï\n") == 0){
+		if(strcmp(buffer, "ì£¼ì°¨ëœ ì°¨ëŸ‰ ëª©ë¡\n") == 0){
 			fscanf(fp, "%d", &c_cnt);	
 //			printf("%d\n", c_cnt);
 			for(i = 0; i < c_cnt; i++){
@@ -178,7 +178,7 @@ int start_process(int c_cnt, int r_cnt){
 //				printf("%s%d%d\n", parked_cars[i].car_num, (parked_cars[i].parked_place.floor), (parked_cars[i].parked_place.num));
 			}
 		}
-		if(strcmp(buffer, "¿¹¾àµÈ Â÷·® ¸ñ·Ï\n") == 0){
+		if(strcmp(buffer, "ì˜ˆì•½ëœ ì°¨ëŸ‰ ëª©ë¡\n") == 0){
 			fscanf(fp, "%d", &r_cnt);	
 //			printf("%d\n", r_cnt);
 			for(i = 0; i < r_cnt; i++){
@@ -186,7 +186,7 @@ int start_process(int c_cnt, int r_cnt){
 //				printf("%s%d%d\n", reserved_cars[i].car_num, (reserved_cars[i].reserved_place.floor), (reserved_cars[i].reserved_place.num));
 			}
 		}
-		if(strcmp(buffer, "Ãşº° Â÷·® ¸ñ·Ï\n") == 0){
+		if(strcmp(buffer, "ì¸µë³„ ì°¨ëŸ‰ ëª©ë¡\n") == 0){
 			for (i = 0; i < 3; i++) {
 				for (j = 0; j < 10; j++) {
 					fscanf(fp, "%s", parking_lots[i][j]);
@@ -209,9 +209,9 @@ int parking(int cnt, int r_cnt) {
 	int floor = 1;
 	int flag = 1;
 	int command = 0; 
-	char car_num[4];
+	char car_num[5];
 	int resv_num;
-	printf("> Â÷¹ø ÀÔ·Â(¼ıÀÚ 4ÀÚ¸®) : ");
+	printf("> ì°¨ë²ˆ ì…ë ¥(ìˆ«ì 4ìë¦¬) : ");
 	scanf("%s", car_num);
 	
 	if((resv_num = check_reservation(car_num, r_cnt)) >= 0){	
@@ -224,18 +224,18 @@ int parking(int cnt, int r_cnt) {
 			
 		strcpy(parking_lots[reserved_cars[resv_num].reserved_place.floor][reserved_cars[resv_num].reserved_place.num], parked_cars[cnt].car_num);
 			
-		printf("@ ÁöÁ¤Â÷·® : B%dÃş %d¹ø ÁÖÂ÷Çß½À´Ï´Ù.\r\n", reserved_cars[resv_num].reserved_place.floor + 1, reserved_cars[resv_num].reserved_place.num + 1);
+		printf("@ ì§€ì •ì°¨ëŸ‰ : B%dì¸µ %dë²ˆ ì£¼ì°¨í–ˆìŠµë‹ˆë‹¤.\r\n", reserved_cars[resv_num].reserved_place.floor + 1, reserved_cars[resv_num].reserved_place.num + 1);
 			
 		cnt++;
 			
 		return cnt;			
 	}
 	
-	printf("@ ÁÖÂ÷ °¡´É °ø°£ : B1Ãş[%d´ë] B2Ãş[%d´ë] B3Ãş[%d´ë]\r\n\r\n", available_lots(parking_lots[0]), available_lots(parking_lots[1]), available_lots(parking_lots[2])); 
+	printf("@ ì£¼ì°¨ ê°€ëŠ¥ ê³µê°„ : B1ì¸µ[%dëŒ€] B2ì¸µ[%dëŒ€] B3ì¸µ[%dëŒ€]\r\n\r\n", available_lots(parking_lots[0]), available_lots(parking_lots[1]), available_lots(parking_lots[2])); 
 	
 	while(1){
 		print_parking_lot(floor);
-		printf("> ÁÖÂ÷ ¹øÈ£ ÀÔ·Â(´Ù¸¥Ãş 0, Ãë¼Ò -1) : ");
+		printf("> ì£¼ì°¨ ë²ˆí˜¸ ì…ë ¥(ë‹¤ë¥¸ì¸µ 0, ì·¨ì†Œ -1) : ");
 		scanf("%d", &command);
 		
 		if(!command){
@@ -275,7 +275,7 @@ int un_parking(Car * car_list, int cnt, int r_cnt){
 	char car[BUFSIZ];
 	int index = -1;
 	
-	printf("> Â÷¹ø ÀÔ·Â(¼ıÀÚ 4ÀÚ¸®) : ");
+	printf("> ì°¨ë²ˆ ì…ë ¥(ìˆ«ì 4ìë¦¬) : ");
 	scanf("%s", car);
 //	puts(car);
 	for(i = 0; i < cnt; i++){
@@ -296,12 +296,12 @@ int un_parking(Car * car_list, int cnt, int r_cnt){
 			}
 			cnt--;
 			
-			puts("@ ÃâÂ÷µÇ¾ú½À´Ï´Ù.");
+			puts("@ ì¶œì°¨ë˜ì—ˆìŠµë‹ˆë‹¤.");
 			return cnt;
 		}
 	}
 	if(index == -1){
-		puts("@ ¾ø´Â Â÷·® ÀÔ´Ï´Ù.");
+		puts("@ ì—†ëŠ” ì°¨ëŸ‰ ì…ë‹ˆë‹¤.");
 		return cnt;
 	}
 }
@@ -311,13 +311,13 @@ int reservation(int cnt){
 	int resv_floor, resv_num;
 	char car_num[BUFSIZ]; 
 	while(1){
-		printf("> Ãş°ú ¹øÈ£ ÀÔ·Â(Á¾·á 0) : ");
+		printf("> ì¸µê³¼ ë²ˆí˜¸ ì…ë ¥(ì¢…ë£Œ 0) : ");
 		scanf("%d", &resv_floor);
 		if(!resv_floor){
 			return cnt;
 		}
 		scanf("%d",&resv_num);
-		printf("> µî·ÏÂ÷·® ¹øÈ£ ÀÔ·Â : ");
+		printf("> ë“±ë¡ì°¨ëŸ‰ ë²ˆí˜¸ ì…ë ¥ : ");
 		scanf("%s", car_num);	
 		
 		reserved_cars[cnt].reserved_place.floor = (resv_floor - 1);
